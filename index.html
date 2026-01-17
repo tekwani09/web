@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Suraksha 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Starry Sky Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0));
+            animation: shoot 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(-300px) translateY(300px); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            animation: fadeInDown 1.2s ease-out;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #a8dadc 50%, #f1faee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(168, 218, 220, 0.5);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #a8dadc;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .photo-card {
+            background: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 218, 220, 0.2);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(135deg, #a8dadc, #f1faee, #457b9d);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(168, 218, 220, 0.3);
+        }
+
+        .photo-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 133%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .photo-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-card:hover .photo-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .photo-content {
+            padding: 30px;
+            background: rgba(22, 33, 62, 0.8);
+        }
+
+        .category {
+            display: inline-block;
+            background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%);
+            color: #0a0e27;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(168, 218, 220, 0.4);
+        }
+
+        .moment {
+            color: #f1faee;
+            font-size: 1.05em;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            font-size: 1.4em;
+            animation: fadeIn 2s ease-in;
+            font-weight: 300;
+        }
+
+        .footer p {
+            color: #a8dadc;
+            margin-bottom: 15px;
+        }
+
+        .footer .heart {
+            color: #ff6b9d;
+            font-size: 1.8em;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        .footer .signature {
+            font-size: 1.3em;
+            background: linear-gradient(135deg, #ffffff 0%, #a8dadc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .header p {
+                font-size: 1.1em;
+            }
+            .photo-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starry Sky -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>For My Beautiful Suraksha 💕</h1>
+            <p>You asked for 5 different photos... Here's my heart in pictures</p>
+        </div>
+
+        <div class="photo-grid">
+            <!-- Photo 1: Hot - Night photo with lit building -->
+            <div class="photo-card" style="animation-delay: 0.1s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1I7-zQZ8nA3bANOXvA1oKsdxQxRBaaVjk&sz=w1000" alt="Hot">
+                </div>
+                <div class="photo-content">
+                    <span class="category">🔥 Hot</span>
+                    <p class="moment">
+                        London nights and that backless dress... Even thousands of miles away, you made my heart race. That's when I realized distance means nothing when someone means everything.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Photo 2: Cute - White dress with modern buildings -->
+            <div class="photo-card" style="animation-delay: 0.2s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1Rw1JcbcvayxA3xrvTEvQATkoDA03qWuJ&sz=w1000" alt="Cute">
+                </div>
+                <div class="photo-content">
+                    <span class="category">🥰 Cute</span>
+                    <p class="moment">
+                        You were in London making the day bright while I was back in India. Your smile literally traveled across continents to light up my world. That white dress, that sunshine, that YOU.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Photo 3: Our Promise - Mirror selfie in white dress -->
+            <div class="photo-card" style="animation-delay: 0.3s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1EfaMu7pcYOukP75mL8Sp0CItL94qaopZ&sz=w1000" alt="Our Promise">
+                </div>
+                <div class="photo-content">
+                    <span class="category">💍 Our Promise</span>
+                    <p class="moment">
+                        The last time we met when you were here. I'm sorry for all the fights, baby. From now on, the only thing I want to make wet is you, not your eyes with tears. Let's make each other feel good, not bad. You and me, forever. 💦❤️
+                    </p>
+                </div>
+            </div>
+
+            <!-- Photo 4: Beautiful - In car with flowers -->
+            <div class="photo-card" style="animation-delay: 0.4s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1vIHG-MO4UjhCwjWaQ5Q5_W50QVtOImu0&sz=w1000" alt="Beautiful">
+                </div>
+                <div class="photo-content">
+                    <span class="category">🌹 Beautiful</span>
+                    <p class="moment">
+                        Our first proper date in Mumbai. Those flowers, that car ride, and officially calling you MINE. You were so beautiful that day, I forgot how to breathe. Actually, you still do that to me every single day.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Photo 5: Funny - Birthday celebration with cake -->
+            <div class="photo-card" style="animation-delay: 0.5s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1oKmLvz_y-DL-J32X0dhK5vQImMT8hZBu&sz=w1000" alt="Funny">
+                </div>
+                <div class="photo-content">
+                    <span class="category">😈 Funny</span>
+                    <p class="moment">
+                        Our anniversary! That innocent cake, that naughty hand placement, and those absolutely gorgeous curves. You know exactly what you're doing to me, don't you? Best celebration ever! 😏🎂
+                    </p>
+                </div>
+            </div>
+
+            <!-- Photo 6: Favorite - Video call screenshot -->
+            <div class="photo-card" style="animation-delay: 0.6s;">
+                <div class="photo-wrapper">
+                    <img src="https://drive.google.com/thumbnail?id=1NRR4gfAoCJWiHp4oQiENzsJNWXuo8qNS&sz=w1000" alt="My Favorite">
+                </div>
+                <div class="photo-content">
+                    <span class="category">❤️ My Favorite</span>
+                    <p class="moment">
+                        This was before we even started dating. One video call, one smile, and I was done for. This is the exact moment I fell in love with you. That cuteness, that laugh, that soul. You had me from hello, Suraksha.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Every picture tells a story, but you ARE my whole story <span class="heart">♥</span></p>
+            <p style="margin-top: 25px; font-size: 0.85em;">I love you more than words can say, more than pictures can show.</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Forever yours,</p>
+            <p class="signature">Your Boy 💕</p>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 60 + '%'; // Focus on upper part
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                // Random animation duration
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                starsContainer.appendChild(star);
+            }
+
+            // Create shooting stars
+            for (let i = 0; i < 3; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = Math.random() * 100 + '%';
+                shootingStar.style.top = Math.random() * 30 + '%';
+                shootingStar.style.width = Math.random() * 100 + 100 + 'px';
+                shootingStar.style.animationDelay = (Math.random() * 5 + i * 3) + 's';
+                starsContainer.appendChild(shootingStar);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
